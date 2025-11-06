@@ -48,17 +48,29 @@ export const MapComponent = () => {
   };
 
   const sendBulk = async (arr: NewPositionData[]) => {
-    if (!arr.length) return;
     try {
-      await fetch("https://localhost:7152/api/positiondata/bulk", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(arr),
+      if (!arr || arr.length === 0) return;
+      // debugging
+      console.log(`SendBulk: sending ${arr.length} items, sample:`, arr[0]);
+
+      const res = await fetch("https://localhost:7152/api/positiondata/bulk", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(arr)
       });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => '<no body>');
+        console.error(`Bulk POST failed: ${res.status} ${res.statusText}`, text);
+      } else {
+        const json = await res.json().catch(() => null);
+        console.log('Bulk POST OK, response:', json);
+      }
     } catch (e) {
-      console.error("SendBulk failed", e);
+      console.error('SendBulk failed (fetch error):', e);
     }
   };
+
 
   // hook
   const { start, pause, restart, setDelay: setAnimDelay } = useRaceAnimation({

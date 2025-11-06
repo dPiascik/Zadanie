@@ -110,6 +110,44 @@ public class PositionDataController : ControllerBase
             return StatusCode(500, new { error = ex.Message, stack = ex.StackTrace });
         }
     }
+    [HttpGet("filtered")]
+    public async Task<ActionResult<IEnumerable<PositionData>>> GetFiltered(
+     [FromQuery] bool? inside,
+     [FromQuery] string? sort,
+     [FromQuery] bool asc = true
+ )
+    {
+        IQueryable<PositionData> q = _context.PositionData;
+
+        // filter
+        if (inside.HasValue)
+        {
+            q = q.Where(p => p.IsInsidePolygon == inside.Value);
+        }
+
+        // sort
+        if (!string.IsNullOrWhiteSpace(sort))
+        {
+            q = sort.ToLower() switch
+            {
+                "id" => asc ? q.OrderBy(x => x.Id) : q.OrderByDescending(x => x.Id),
+                "latitude" => asc ? q.OrderBy(x => x.Latitude) : q.OrderByDescending(x => x.Latitude),
+                "longitude" => asc ? q.OrderBy(x => x.Longitude) : q.OrderByDescending(x => x.Longitude),
+                "isinsidepolygon" => asc ? q.OrderBy(x => x.IsInsidePolygon) : q.OrderByDescending(x => x.IsInsidePolygon),
+                "exittime" => asc ? q.OrderBy(x => x.ExitTime) : q.OrderByDescending(x => x.ExitTime),
+                _ => q
+            };
+        }
+        else
+        {
+            // default sort
+            q = q.OrderBy(x => x.Id);
+        }
+
+        return await q.ToListAsync();
+    }
+
+
 
 
 }

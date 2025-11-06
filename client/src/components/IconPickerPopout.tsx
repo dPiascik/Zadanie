@@ -20,24 +20,24 @@ export const IconPickerPopout: React.FC<IconPickerProps> = ({ selectedIcon, setS
   };
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <div className='icon-picker-container'>
       <button
         onClick={() => setIsOpen(!isOpen)}
         style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px', cursor: 'pointer' }}
       >
-        <img src={selectedIcon} alt="Wybrany samochód" style={{ width: '30px' }} />
+        <img src={selectedIcon} alt="Wybrany samochód" className='icon-picker-selected' />
         Wybierz samochód
       </button>
 
       {isOpen && (
-        <div>
+        <div className='icon-picker-popout'>
           {icons.map(icon => (
             <img
               key={icon.src}
               src={icon.src}
               alt={icon.label}
               onClick={() => handleClick(icon.src)}
-              style={{ width: '50px', height: '50px', cursor: 'pointer', border: selectedIcon === icon.src ? '2px solid blue' : '2px solid transparent', borderRadius: '8px', }}
+              className={`icon-picker-item ${selectedIcon === icon.src ? 'selected' : ''}`}
             />
           ))}
         </div>

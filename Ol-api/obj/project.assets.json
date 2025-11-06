@@ -2551,11 +2551,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Damian\\Documents\\Projekt\\P1\\App1\\Aplikacja-ol\\OL-app\\Ol-api\\Ol-api.csproj",
+      "projectUniqueName": "C:\\Users\\Damian\\Documents\\Projekt\\ZADANIE\\Aplikacja-ol\\OL-app\\Ol-api\\Ol-api.csproj",
       "projectName": "Ol-api",
-      "projectPath": "C:\\Users\\Damian\\Documents\\Projekt\\P1\\App1\\Aplikacja-ol\\OL-app\\Ol-api\\Ol-api.csproj",
+      "projectPath": "C:\\Users\\Damian\\Documents\\Projekt\\ZADANIE\\Aplikacja-ol\\OL-app\\Ol-api\\Ol-api.csproj",
       "packagesPath": "C:\\Users\\Damian\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Damian\\Documents\\Projekt\\P1\\App1\\Aplikacja-ol\\OL-app\\Ol-api\\obj\\",
+      "outputPath": "C:\\Users\\Damian\\Documents\\Projekt\\ZADANIE\\Aplikacja-ol\\OL-app\\Ol-api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Damian\\AppData\\Roaming\\NuGet\\NuGet.Config"
